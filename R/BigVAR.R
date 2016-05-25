@@ -14,7 +14,7 @@
 #' data(Y)
 #' T1=floor(nrow(Y)/3)
 #' T2=floor(2*nrow(Y)/3)
-#' m1=constructModel(Y,p=4,struct="Basic",gran=c(50,10),verbose=FALSE,T1=T1,T2=T2)
+#' m1=constructModel(Y,p=4,struct="Basic",gran=c(50,10),verbose=FALSE,T1=T1,T2=T2,IC=FALSE)
 #' plot(m1)
 #' results=cv.BigVAR(m1)
 #' plot(results)

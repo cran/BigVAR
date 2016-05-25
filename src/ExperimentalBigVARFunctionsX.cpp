@@ -334,7 +334,7 @@ List BlockUpdateGL(mat& beta,const mat& Z1, double lam, const mat& Y1,double eps
 					mat r =beta.cols(scomp1)*Z1.rows(scomp1)-Y1 ;
 
 					colvec p=vectorise((r)*trans(Z1.rows(s45)));
-					double adjlam=sqrt(s45.n_elem)*lam;
+					double adjlam=sqrt(static_cast<double>(s45.n_elem))*lam;
 
 					// threshold to enforce sparsity 
 					if(arma::norm(p,"fro")<=adjlam)
@@ -530,7 +530,7 @@ List BlockUpdate2(const mat& ZZ1, double lam,const mat& Y1,double eps, List grou
 					arma::mat eigvec=eigvecF_(i);
 					arma::mat p=trans(M1)*r;
 
-					double rho=sqrt(s1.size());
+					double rho=sqrt(static_cast<double>(s1.size()));
 					double adjlam=rho*lam;
 
 					if(arma::norm(p,2)<=adjlam)
@@ -773,7 +773,7 @@ List blockUpdateSGLOO( colvec& beta,const mat& Z1, double lam, double alpha,cons
 					const arma::mat p=-trans(M1)*(r-M1*beta2);
 
 
-					double rho=sqrt(s4.n_elem);
+					double rho=sqrt(static_cast<double>(s4.n_elem));
 					colvec STS;
 						if(alpha>0){
 							STS=ST3a(vectorise(p),lam*alpha);
@@ -868,7 +868,7 @@ mat ThreshUpdateSGLOO(colvec& betaActive,const mat& Z,const double lam,const col
 		int converge=0;
 		double th=10*eps;
 		int iters=0;
-		while(converge==0 & th>eps)	
+		while((converge==0) & (th>eps))	
 			{
 				colvec betaOld=betaActive;
 				betaActive2=blockUpdateSGLOO(betaActive,Z,lam,alpha,Y,eps,groups_,fullgroups_,compgroups_,M2f_,eigs_,k1,m);	 
@@ -977,7 +977,7 @@ List GamLoopSGLOODP(NumericVector beta_,const List Activeset_,mat gamm,const col
 			//Three components in the list
 			int iters=0;
 			int maxiters=1000;
-			while(converge==0 & iters<maxiters )
+			while((converge==0) & (iters<maxiters) )
 				{
 					B = ThreshUpdateSGLOO(B, Z, gam, Y2, eps, Active, jjfull_, jjcomp_, M2f_, eigs_, alpha1,(double) k1,m);
  
@@ -1023,7 +1023,7 @@ rowvec proxcpp(colvec v2,int L,double lambda,int k,colvec w)
 			uvec res = conv_to<uvec>::from(ivec);	
 
 			
-			if(norm(r(res)/(lambda*w(q)),"fro")<1+pow(10,-8))
+			if(norm(r(res)/(lambda*w(q)),"fro")<1+1e-8)
 				{
 					r(res)=zeros(res.n_elem);
 	
@@ -1050,7 +1050,7 @@ mat Fistapar(const mat Y,const mat Z,const mat phi, const int L,const double lam
 	for(int r=0;r<L;++r)
 
 		{
-			w(r)=sqrt(k);
+			w(r)=sqrt(static_cast<double>(k));
 
 		}
 	const colvec w2=w;
@@ -1135,7 +1135,7 @@ rowvec proxcppOO(colvec v2,int L,double lambda,List vsubs,int k,colvec w)
 
 			uvec res=as<uvec>(vsubs(i));
 
-			if(norm(r(res)/(lambda*w(i)),"fro")<1+pow(10,-8))
+			if(norm(r(res)/(lambda*w(i)),"fro")<1+1e-8)
 				{
 					r(res)=zeros(res.n_elem);
 				}
@@ -1265,7 +1265,7 @@ rowvec proxcppelem(colvec v2,int L,double lambda,uvec res1,colvec w)
 	  
 
 
-			if(norm(r(res)/(lambda*w(i)),"fro")<1+pow(10,-8))
+			if(norm(r(res)/(lambda*w(i)),"fro")<1+1e-8)
 				{
 					r(res)=zeros(res.n_elem);
 				}
@@ -1441,7 +1441,7 @@ mat QRF(const mat& K, mat R5, int i, int kp, int k1, int p)
 		}
 	mat K2=K*RA;
 	int q=K2.n_cols;
-	double delta=(pow(q,2)+q+1)*sqrt(std::numeric_limits<double>::epsilon());
+	double delta=(pow(static_cast<double>(q),2)+q+1)*sqrt(std::numeric_limits<double>::epsilon());
 	colvec D1=zeros(K2.n_cols);
 	for(int i=0;i<q;++i)
 		{
@@ -1478,7 +1478,7 @@ mat RelaxedLS(const mat K,  mat B2, int k, int p,int k1, int s)
 		for(int i=0;i<k1;++i)
 			{
 				rowvec B3a=B3.row(i);
-				unsigned int thresh=pow(10,-8);
+				unsigned int thresh=1e-8;
 
 				uvec R1a=find(abs(B3a)>thresh);
 				if(R1a.n_elem<2){A.row(i)=B3a;}
@@ -1603,7 +1603,7 @@ List blockUpdateSGLX(mat& beta,const mat& Z1, double lam, double alpha,const mat
 					arma::mat p=(beta2*M1-r)*trans(M1);
 
 
-					double rho=sqrt(s45.size());
+					double rho=sqrt(static_cast<double>(s45.size()));
 
 
 					colvec STS;
@@ -1769,7 +1769,7 @@ colvec proxvx2(colvec v2,int L,double lambda,int m,int k,int F1)
 			else{std::iota(ivec.begin(), ivec.end(), 0);}
 			uvec res = conv_to<uvec>::from(ivec);	
 
-			if(norm(r(res)/(lambda),"fro")<1+pow(10,-8))
+			if(norm(r(res)/(lambda),"fro")<1+1e-8)
 				{
 					r(res)=zeros(res.n_elem);
 				}
@@ -1879,14 +1879,14 @@ List blockUpdateSGL(mat& beta,const mat& Z1, double lam, double alpha,const mat&
 
 					arma::uvec s4(s3.size());
 
-					for(int j=0; j<s3.size(); ++j)
+					for(int j=0; j< (int) s3.size(); ++j)
 						{
 							s4(j)=s3(j);
 						}
 	  
 					arma::uvec scomp2(scomp1.size());
 
-					for(int m=0; m<scomp1.size(); ++m)
+					for(int m=0; m< (int)scomp1.size(); ++m)
 						{
 							scomp2(m)=scomp1(m);
 						}

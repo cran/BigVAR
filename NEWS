@@ -1,6 +1,6 @@
-BigVAR v 1.0.1 (Release date: 2016-05-20)
+BigVAR v 1.0.2 (Release date: 2017-03-24)
 ==============
 
 Changes: 
 
-* Fixed memory access issues, rewrote C++ code for compatibility with Solaris.
+* Fixed namespace collision issue with RcppEigen, removed C++11 requirement.

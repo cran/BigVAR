@@ -95,4 +95,3 @@ William B Nicholson, David S. Matteson, and Jacob Bien (2016), "BigVAR: Dimensio
 \seealso{
 \code{\link{cv.BigVAR}},\code{\link{BigVAR.est}}
 }
-

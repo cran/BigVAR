@@ -17,6 +17,8 @@ To construct an object of class BigVAR, use the function \code{\link{constructMo
 
 \item{\code{lagmax}}{Maximal lag order for modeled series}
 
+\item{\code{intercept}}{Indicator as to whether an intercept should be included}
+
 \item{\code{Structure}}{Penalty Structure}
 
 \item{\code{Relaxed}}{Indicator for relaxed VAR}
@@ -52,6 +54,12 @@ To construct an object of class BigVAR, use the function \code{\link{constructMo
 \item{\code{recursive}}{Indicator as to whether recursive multi-step forecasts are used (applies only to multiple horizon VAR models)}
 
 \item{\code{constvec}}{vector indicating variables to shrink toward a random walk instead of toward zero (valid only if Minnesota is \code{TRUE})}
+
+\item{\code{tol}}{optimization tolerance}
+
+\item{\code{lagselect}}{lag selection indicator}
+
+\item{\code{window.size}}{size of rolling window.  If set to NULL an expanding window will be used.}
 }}
 
 \seealso{

@@ -2,6 +2,7 @@
 
 export(BigVAR.est)
 export(MultVarSim)
+export(PredictVARX)
 export(SparsityPlot.BigVAR.results)
 export(VARXFit)
 export(VARXForecastEval)
@@ -32,4 +33,4 @@ importFrom(zoo,as.zoo)
 importFrom(zoo,index)
 importFrom(zoo,plot.zoo)
 importFrom(zoo,zoo)
-useDynLib(BigVAR,.registration=TRUE)
+useDynLib(BigVAR)

@@ -8,6 +8,7 @@
 using namespace Eigen;
 using namespace Rcpp;
 using namespace std;
+#define NDEBUG 1
 
 //triangular solver 
 MatrixXd backsolve(const MatrixXd& R2, const MatrixXd& R){
@@ -408,9 +409,9 @@ List ICX(NumericMatrix Y1, NumericMatrix X1, double k, int pmax,int smax,double 
 							break;
 						}else{
 
-						int os=max(i,j);
+						os=max(i,j);
 
-						int kp  =k*i+m*j+1;
+						kp  =k*i+m*j+1;
 						// Z.resize(kp,T-os);
 
 						// MatrixXd Z(kp,T-os);
@@ -543,6 +544,39 @@ List ICX(NumericMatrix Y1, NumericMatrix X1, double k, int pmax,int smax,double 
 	return(Results);
   
 }
+
+
+
+List ARFitV2(const MatrixXd K2, const int k, const int p)
+{
+  int RC=k*p+1;
+  int T=K2.rows();
+  int q=K2.cols();
+  double delta = (pow(q,2)+q+1)*sqrt(std::numeric_limits<double>::epsilon());
+  VectorXd D1(K2.cols());
+  for(int i=0;i<q;++i)
+    {
+      D1(i)=K2.col(i).norm();
+
+	}
+  D1=sqrt(delta)*D1;
+  MatrixXd AA=D1.asDiagonal();
+  MatrixXd K3(K2.rows()+AA.rows(),K2.cols());
+  K3 << K2, AA;
+  
+  HouseholderQR<MatrixXd> QR1(K3);
+  MatrixXd R = QR1.matrixQR().triangularView<Upper>();
+  MatrixXd R11=R.topLeftCorner(RC,RC);
+  //old value RC RC
+  MatrixXd R22=R.block(RC,RC,k,k);
+  MatrixXd R12=R.topRightCorner(RC,k);
+  MatrixXd Test= backsolve(R12,R11);
+  MatrixXd Sigma=(R22.transpose()*R22)/(T-RC);
+  
+  List Results=List::create(Named("Rhat")=Test.transpose(),Named("SigmaU")=Sigma);
+  return(Results);			      
+			   		      
+			    }
 
 
 

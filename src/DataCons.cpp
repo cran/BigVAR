@@ -20,29 +20,37 @@ MatrixXd backsolve(const MatrixXd& R2, const MatrixXd& R){
 
 }
 
-
 MatrixXd ZmatF(const MatrixXd& Y,  int p, const int k,bool intercept=true,bool oos=false,bool contemp=false,int offset=0)
 {
 
+		// Rcout<<"check"<<endl;
 
 	int T=Y.rows();
 	// some issues with out of sample predictions and contemporaneous dependence
     if(oos & !contemp){
 		T+=1;
 	}
+		// Rcout<<"check2"<<endl;
 
 	MatrixXd Y2=Y.rowwise().reverse();
 	if(contemp){p+=1;}
 	
 	// MatrixXd Y2a=Y2.topLeftCorner(p,k);
 	MatrixXd Y2a=Y2.block(offset,0,p,k);
-	
+			// Rcout<<"check3"<<endl;
+
 	Y2a.transposeInPlace();
 	VectorXd Y1(Map<VectorXd>(Y2a.data(),Y2a.cols()*Y2a.rows()));
 	int M=T-p-offset;
+   
 	if(contemp){
-		M-=1;
+		//fixed
+		M+=1;
+		
 	}
+	// if(contemp){
+	// Rcout<<Y2<<endl;
+	// }
 	// 	M=T-p;
 	// }
 
@@ -150,11 +158,10 @@ MatrixXd VARXCons(NumericMatrix Y1, NumericMatrix X1, const int k, const int p, 
 	// MatrixXd Z2(m*s,T-s);
 
 		
-	if(s==0){
+	if((s==0) & (m==0)){
 		MatrixXd Z1=ZmatF(Y,p,k,true,oos,false);
 		return(Z1);
-	}else if (p==0){
-	// }else if(p==0){
+	}else if(p==0){
 
 		const Map<MatrixXd>  X(as<Map<MatrixXd> >(X1));
 
@@ -178,7 +185,6 @@ MatrixXd VARXCons(NumericMatrix Y1, NumericMatrix X1, const int k, const int p, 
 		
 		MatrixXd Z1a=ZmatF(Y,p,k,true,oos,false,offsetE);
 
-		
 		MatrixXd Z2=ZmatF(X,s,m,false,oos,contemp,offsetX);	  
 	//adjusting for contemp. dependence
 	// if(contemp & oos){Z1=Z1.rightCols(Z1.cols()-1);}

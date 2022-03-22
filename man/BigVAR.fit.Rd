@@ -4,9 +4,24 @@
 \alias{BigVAR.fit}
 \title{Simple function to fit BigVAR model with fixed penalty parameter}
 \usage{
-BigVAR.fit(Y, p, struct, lambda, alpha = NULL, VARX = list(),
-  separate_lambdas = F, MN = F, C = as.double(NULL),
-  intercept = TRUE, tf = F, tol = 1e-04, RVAR = F, beta = NULL)
+BigVAR.fit(
+  Y,
+  p,
+  struct,
+  lambda,
+  alpha = NULL,
+  VARX = list(),
+  separate_lambdas = F,
+  MN = F,
+  C = as.double(NULL),
+  intercept = TRUE,
+  tf = F,
+  tol = 1e-04,
+  RVAR = F,
+  refit_fraction = 1,
+  beta = NULL,
+  gamma = 3
+)
 }
 \arguments{
 \item{Y}{\eqn{T \times k} multivariate time series or Y \eqn{T \times (k+m)} endogenous and exogenous series, respectively}
@@ -35,32 +50,39 @@ BigVAR.fit(Y, p, struct, lambda, alpha = NULL, VARX = list(),
 
 \item{RVAR}{True or False: option to refit based upon the support selected using the Relaxed-VAR procedure}
 
-\item{beta}{optional \eqn{k\times (k\times p + m\times s +1)} coefficient matrix to use as a "warm start" (default \code{FALSE})
+\item{refit_fraction}{fraction of least squares refit to incorporate (default 1)}
 
- @details The choices for "struct" are as follows
+\item{beta}{optional \eqn{k\times (k\times p + m\times s +1)} coefficient matrix to use as a 'warm start' (default \code{NULL})}
+
+\item{gamma}{additional parameter for SCAD/MCP penalty (default 3)
+
+ @details The choices for 'struct' are as follows
 \itemize{
-\item{  "Basic" (Basic VARX-L)}
-\item{  "Lag" (Lag Group VARX-L)} 
-\item{  "SparseLag" (Lag Sparse Group VARX-L)} 
-\item{  "OwnOther" (Own/Other Group VARX-L) }
-\item{  "SparseOO" (Own/Other Sparse Group VARX-L) }
-\item{  "EFX" (Endogenous First VARX-L)}
-\item{  "HVARC" (Componentwise HVAR) }
-\item{  "HVAROO" (Own/Other HVAR) }
-\item{  "HVARELEM" (Elementwise HVAR)}
-\item{  "Tapered" (Lag weighted Lasso VAR)}
-\item{  "BGR" (Bayesian Ridge Regression (cf. Banbura et al))}
+\item{  'Basic' (Basic VARX-L)}
+\item{  'BasicEN' (Basic Elastic Net VARX-L)}
+\item{  'Lag' (Lag Group VARX-L)} 
+\item{  'SparseLag' (Lag Sparse Group VARX-L)} 
+\item{  'OwnOther' (Own/Other Group VARX-L) }
+\item{  'SparseOO' (Own/Other Sparse Group VARX-L) }
+\item{  'EFX' (Endogenous First VARX-L)}
+\item{  'HLAGC' (Componentwise HLAG) }
+\item{  'HLAGOO' (Own/Other HLAG) }
+\item{  'HLAGELEM' (Elementwise HLAG)}
+\item{  'Tapered' (Lag weighted Lasso VAR)}
+\item{  'BGR' (Bayesian Ridge Regression (cf. Banbura et al))}
+\item{  'MCP' (Minimax Concave Penalty (cf. Breheny and Huang))}
+\item{  'SCAD' (Smoothly Clipped Absolute Deviation (cf. Breheny and Huang))}
 }
 
 VARX specifications consist of a list with entry k denoting the series that are to be modeled and entry s to denote the maximal lag order for exogenous series.
 
-The argument alpha is ignored unless the structure choice is "SparseLag" or "Lag."  By default "alpha" is set to \code{NULL} and will be initialized as 1/(k+1) in \code{cv.BigVAR} and \code{BigVAR.est}.  Any user supplied values must be between 0 and 1.}
+The argument alpha is ignored unless the structure choice is 'SparseLag' or 'Lag.'  By default 'alpha' is set to \code{NULL} and will be initialized as 1/(k+1) in \code{cv.BigVAR} and \code{BigVAR.est}.  Any user supplied values must be between 0 and 1.}
 }
 \description{
 Simple function to fit BigVAR model with fixed penalty parameter
 }
 \note{
-The specifications "Basic", "Lag," "SparseLag," "SparseOO," and "OwnOther" can accommodate both VAR and VARX models.  EFX only applies to VARX models.  "HVARC," "HVAROO," "HVARELEM," and "Tapered" can only be used with VAR models.
+The specifications 'Basic', 'Lag,' 'SparseLag,' 'SparseOO,' and 'OwnOther' can accommodate both VAR and VARX models.  EFX only applies to VARX models.  'HLAGC,' 'HLAGOO,' 'HLAGELEM,' and 'Tapered' can only be used with VAR models.  Our implementation of the SCAD and MCP penalties is heavily influenced by the implementation in \code{ncvreg}.
 }
 \examples{
 # VARX Example
@@ -69,14 +91,14 @@ VARX=list()
 VARX$k=2 # indicates that the first two series are modeled
 VARX$s=2 # sets 2 as the maximal lag order for exogenous series
 data(Y)
-BigVAR.fit(Y,p=4,"Basic",lambda=1e-2,VARX=VARX)
+BigVAR.fit(Y,p=4,'Basic',lambda=1e-2,VARX=VARX)
 }
 \references{
-William B Nicholson, Jacob Bien, and David S Matteson. "High Dimensional Forecasting via Interpretable Vector Autoregression." arXiv preprint arXiv:1412.5250, 2016.
+Banbura, Marta, Domenico Giannone, and Lucrezia Reichlin. 'Large Bayesian vector auto regressions.' Journal of Applied Econometrics 25.1 (2010): 71-92.
+Breheny P, Huang J (2011). “Coordinate descent algorithms for nonconvex penalized regression, with applications to biological feature selection.” Annals of Applied Statistics, 5(1), 232–253.
+William B Nicholson, Jacob Bien, and David S Matteson. 'High Dimensional Forecasting via Interpretable Vector Autoregression.' arXiv preprint arXiv:1412.5250, 2016.
 William B. Nicholson, David S. Matteson, Jacob Bien,VARX-L: Structured regularization for large vector autoregressions with exogenous variables, International Journal of Forecasting, Volume 33, Issue 3, 2017, Pages 627-651,
-William B Nicholson, David S. Matteson, and Jacob Bien (2016), "BigVAR: Tools for Modeling Sparse High-Dimensional Multivariate Time Series" arxiv:1702.07094
-
-Banbura, Marta, Domenico Giannone, and Lucrezia Reichlin. "Large Bayesian vector auto regressions." Journal of Applied Econometrics 25.1 (2010): 71-92.
+William B Nicholson, David S. Matteson, and Jacob Bien (2016), 'BigVAR: Tools for Modeling Sparse High-Dimensional Multivariate Time Series' arxiv:1702.07094
 }
 \seealso{
 \code{\link{cv.BigVAR}},\code{\link{BigVAR.est}},\code{\link{constructModel}}

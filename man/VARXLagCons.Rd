@@ -22,8 +22,8 @@ VARXLagCons(Y, X = NULL, p, s = 0, oos = FALSE, contemp = FALSE)
 \value{
 list with two entries:
 \itemize{
-\item{"Z"}{\eqn{kp+ms+1\times T-max(p,s)} VARX lag matrix}
-\item{"Y"}{adjusted \eqn{k\times T-max(p,s)} endogenous series}
+\item{'Z'}{\eqn{kp+ms+1\times T-max(p,s)} VARX lag matrix}
+\item{'Y'}{adjusted \eqn{k\times T-max(p,s)} endogenous series}
 }
 }
 \description{
@@ -38,7 +38,7 @@ data(Y)
 ZZ<-VARXLagCons(Y,X=NULL,p=4,s=0)
 }
 \references{
-See page 15 of Lutkepohl, "A New Introduction to Multiple Time Series Analysis
+See page 15 of Lutkepohl, 'A New Introduction to Multiple Time Series Analysis
 }
 \seealso{
 \code{\link{MultVarSim}}

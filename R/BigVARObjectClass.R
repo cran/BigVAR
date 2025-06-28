@@ -22,7 +22,7 @@ check.BigVAR <- function(object) {
         msg <- c("Maximal lag order must be at least 0")
         errors <- c(errors, msg)
     }
-    if (object@lagmax == 0 & !object@Structure %in% c("Basic", "BasicEN")) {
+    if (object@lagmax == 0 & !object@Structure %in% c("Basic", "BasicEN","SCAD","MCP")) {
         msg <- c("Only Basic VARX-L supports a transfer function")
         errors <- c(errors, msg)
     }
@@ -348,7 +348,7 @@ constructModel <- function(Y, p, struct, gran, h = 1, cv = "Rolling", verbose = 
     if (p < 0) {
         stop("Maximal lag order must be at least 0")
     }
-    if (p == 0 & !struct %in% c("Basic", "BasicEN")) {
+    if (p == 0 & !struct %in% c("Basic", "BasicEN", "SCAD","MCP")) {
         stop("Only Basic VARX-L supports a transfer function")
     }
     oldnames <- c("None", "Diag", "SparseDiag")
@@ -702,7 +702,7 @@ setMethod(f = "cv.BigVAR", signature = "BigVAR", definition = function(object) {
         gran2 <- object@Granularity[2]
         gran1 <- object@Granularity[1]
         
-        lambda <- create_lambda_grid(trainY[1:T2, , drop = FALSE], trainZ[, 1:T2], lapply(groups, function(x) {
+        lambda <- create_lambda_grid(trainY[1:T2, , drop = FALSE], trainZ[, 1:T2, drop = FALSE], lapply(groups, function(x) {
             x + 1
         }), gran1, gran2, group, p, k1, s + s1, m, k, MN, alpha, C, intercept, tol, VARXI, separate_lambdas, dual, gamma,
         linear, verbose)
@@ -905,6 +905,7 @@ setMethod(f = "cv.BigVAR", signature = "BigVAR", definition = function(object) {
             BICbench$svec <- BICbench1$s
         } else {
             offset <- max(c(p, s))
+            
             X <- matrix(Y[(offset + 1):nrow(Y), (k1 + 1):ncol(Y)], ncol = m)
             AICbench1 <- VARXForecastEval(matrix(ZFull$Y[, 1:k1], ncol = k1), as.matrix(X), p, s, T2, T3, "AIC", h = h, loss = loss,
                                           delta = delta)
@@ -1013,7 +1014,11 @@ setMethod(f = "BigVAR.Eval", signature = "BigVAR.intermediate", definition = fun
         optind <- object@index
     } else {
         lambda <- object@OptimalLambda
-        optind <- 1
+        if(!object@separate_lambdas){
+            optind <- 1
+        }else{
+            optind <- object@index
+            }
     }
     gran2 <- nrow(as.matrix(lambda))
     lambdaopt <- object@OptimalLambda
@@ -1162,12 +1167,14 @@ setMethod(f = "BigVAR.Eval", signature = "BigVAR.intermediate", definition = fun
         temp_results <- refine_and_forecast(beta, as.matrix(eZ), trainZ, trainY, ZFull$Y[v + h - 1, , drop = FALSE], lambda = lambda,
                                             h = h, recursive = recursive, MN = MN, RVAR = RVAR, refit_fraction = refit_fraction, separate_lambdas = separate_lambdas,
                                             C = C, inds = NULL, loss = loss, delta = delta, k = k, p = p, k1 = k1, s = s, oos = !rolling_oos)
+        
         if (!rolling_oos) {
             if (separate_lambdas) {
-                MSFE_oos[msfe_index] <- temp_results$MSFE[optind]
-                for (col in seq_len(ncol(temp_results$MSFE))) {
-                    preds[msfe_index, col] <- temp_results$preds[col, optind[col]]
-                    betaArray[col, , msfe_index] <- temp$beta[col, , optind[col]]
+                
+                MSFE_oos[msfe_index] <- temp_results$MSFE[1]
+                for (col in seq_len(ncol(temp_results$MSFE))) {                    
+                    preds[msfe_index, col] <- temp_results$preds[col,]                
+                    betaArray[col, , msfe_index] <- temp$beta[col, , ]
                 }
             } else {
                 MSFE_oos[msfe_index] <- temp_results$MSFE
@@ -1197,15 +1204,19 @@ setMethod(f = "BigVAR.Eval", signature = "BigVAR.intermediate", definition = fun
             lambda_evolve[msfe_index, ] <- lambdaopt
         }
     }
+    if(rolling_oos){
+        lambda <- lambdaopt
+    }    
     temp <- .BigVAR.fit(group, beta, ZFull$Z, ZFull$Y, lambda, tol, p, m, k1, k, s, s1, MN, C, intercept, separate_lambdas,
                         dual, activeset, starting_eigvals, groups, compgroups, VARXI, alpha, palpha)
     betas_full <- temp$beta
-    if (separate_lambdas) {
-        betaPred <- matrix(0, nrow = ncol(Y), ncol = dim(betas_full)[2])
-        for (col in seq_len(ncol(Y))) betaPred[col, ] <- betas_full[col, , optind[col]]
-    } else {
-        betaPred <- as.matrix(betas_full[, , optind])
-    }
+    # no longer necessary, handled by .BigVAR.fit
+    ## if (separate_lambdas) {
+    ##     betaPred <- matrix(0, nrow = ncol(Y), ncol = dim(betas_full)[2])
+    ##     for (col in seq_len(ncol(Y))) betaPred[col, ] <- betas_full[col, , optind[col]]
+    ## } else {
+    betaPred <- as.matrix(betas_full[, , 1])
+    ## }
     return(list(MSFE = MSFE_oos, betaPred = betaPred, predictions = preds, betaArray = betaArray, lambda_evolve = lambda_evolve))
 })
 
@@ -1724,4 +1735,5 @@ setMethod(f = "coef", signature = "BigVAR.results", definition = function(object
         names(B) <- bnames
     }
     return(B)
-})
+}
+)

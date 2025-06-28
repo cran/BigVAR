@@ -17,14 +17,12 @@ VARXFit(Y, p, IC, VARX = NULL)
 }
 \value{
 Returns a list with four entries:
-\itemize{
 \item{'Bhat'}{Estimated \eqn{k\times kp+ms} coefficient matrix}
 \item{'SigmaU}{Estimated \eqn{k\times k} residual covariance matrix}
 \item{'phat'}{Selected lag order for VAR component}
 \item{'shat'}{Selected lag order for VARX component}
 \item{'Y'}{multivariate time series retained for prediction purposes}
 \item{'Y'}{number of endogenous (modeled) time series}
-}
 }
 \description{
 Fit a VAR or VARX model by least squares

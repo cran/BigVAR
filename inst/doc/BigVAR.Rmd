@@ -41,7 +41,7 @@ Our package adapts solution methods from the regularization literature to a mult
 
 We also allow for least squares refitting based on the nonzero support selected by our procedures as well as the ability to incorporate mild non-stationarity by shrinking toward a vector random walk.  For more information on these extensions, we refer you to our papers @Nicholson and @Nicholson2. 
 
-This vignette presents a brief formal overview of our notation, the models contained in ${\tt BigVAR}$, and the functionality of the package.  For an interactive tutorial see [the shiny app](http://bigvar.ddns.net:3838/BigVAR/).  Any questions or feature requests with regard to ${\tt BigVAR}$ can be addressed to wbn8@cornell.edu.  If you have basic questions about VAR or multivariate time series in general, we recommend consulting @lutk.
+This vignette presents a brief formal overview of our notation, the models contained in ${\tt BigVAR}$, and the functionality of the package.  Any questions or feature requests with regard to ${\tt BigVAR}$ can be addressed to wbn8@cornell.edu.  If you have basic questions about VAR or multivariate time series in general, we recommend consulting @lutk.
 
 ## Roadmap
 

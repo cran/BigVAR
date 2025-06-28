@@ -60,8 +60,8 @@ BigVAR.fit(
 \itemize{
 \item{  'Basic' (Basic VARX-L)}
 \item{  'BasicEN' (Basic Elastic Net VARX-L)}
-\item{  'Lag' (Lag Group VARX-L)} 
-\item{  'SparseLag' (Lag Sparse Group VARX-L)} 
+\item{  'Lag' (Lag Group VARX-L)}
+\item{  'SparseLag' (Lag Sparse Group VARX-L)}
 \item{  'OwnOther' (Own/Other Group VARX-L) }
 \item{  'SparseOO' (Own/Other Sparse Group VARX-L) }
 \item{  'EFX' (Endogenous First VARX-L)}
@@ -87,11 +87,11 @@ The specifications 'Basic', 'Lag,' 'SparseLag,' 'SparseOO,' and 'OwnOther' can a
 \examples{
 # VARX Example
 # Fit a Basic VARX-L with k=2, m=1, s=2, p=4, lambda=1e-2
-VARX=list()
-VARX$k=2 # indicates that the first two series are modeled
-VARX$s=2 # sets 2 as the maximal lag order for exogenous series
+VARX <- list()
+VARX$k <- 2 # indicates that the first two series are modeled
+VARX$s <- 2 # sets 2 as the maximal lag order for exogenous series
 data(Y)
-BigVAR.fit(Y,p=4,'Basic',lambda=1e-2,VARX=VARX)
+BigVAR.fit(Y, p = 4, "Basic", lambda = 1e-2, VARX = VARX)
 }
 \references{
 Banbura, Marta, Domenico Giannone, and Lucrezia Reichlin. 'Large Bayesian vector auto regressions.' Journal of Applied Econometrics 25.1 (2010): 71-92.

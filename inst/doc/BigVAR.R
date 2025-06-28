@@ -1,11 +1,11 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ---- eval=FALSE--------------------------------------------------------------
-#  install_github("wbnicholson/BigVAR/BigVAR")
+## ----eval=FALSE---------------------------------------------------------------
+# install_github("wbnicholson/BigVAR/BigVAR")
 
 ## -----------------------------------------------------------------------------
 library(BigVAR)
@@ -19,7 +19,7 @@ Z = VARXLagCons(Y,p=2,oos=TRUE)$Z
 # obtain out of sample forecasts
 yhat = B%*%Z[,ncol(Z),drop=F]
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 suppressMessages(library(BigVAR,quietly=TRUE,warn.conflicts=FALSE))
 #onorm=c()
 library(lattice)
@@ -407,7 +407,7 @@ return(IRF)
 
 }
 
-## ---- echo=TRUE,eval=TRUE,cache=TRUE------------------------------------------
+## ----echo=TRUE,eval=TRUE,cache=TRUE-------------------------------------------
 require(quantmod)
 require(zoo)
 # get GDP, Federal Funds Rate, CPI from FRED

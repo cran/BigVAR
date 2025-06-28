@@ -17,3 +17,13 @@ NULL
 #' @references Gredenhoff, Mikael, and Sune Karlsson. "Lag-length selection in VAR-models using equal and unequal lag-length procedures." Computational Statistics 14.2 (1999): 171-187.
 #' @author Will Nicholson
  NULL
+
+
+#' Example multivariate macroeconomic time series
+#' 
+#' @name Y1
+#' @title Example quarterly macroeconomic data
+#' @docType data
+#' @details US Macroeconomic Time Series: CPI, Federal Funds Rate, Gross Domestic Product, and M1.  Ranging from Q2 1959 to Q1 2025.  Procured from FRED, Federal Reserve Bank of St. Louis.
+#' @author Will Nicholson
+ NULL

@@ -368,11 +368,11 @@ List Eigencomp( mat& Z1, List groups,int n1,int k1)
 	List eigvalF(n1);
 	List M3f(n1);
 	List eigvecF(n1);
-	int count=0;
+	// int count=0;
 	for(int i=0; i<n1; ++i)
 		{
 			NumericVector g1=groups[i];
-			count+=g1.size();
+			// count+=g1.size();
 
 			arma::uvec s4=as<arma::uvec>(g1);
 			arma::mat M1=Z1.rows(s4);
@@ -408,11 +408,11 @@ List EigencompOO( mat& ZZ1, List groups,int n1,int k)
 	List M2f(n1);
 	List eigvecF(n1);
 	List eigvalF(n1);
-	int count=0;
+	// int count=0;
 	for(int i=0; i<n1; ++i)
 		{
 			arma::uvec s4=as<arma::uvec>(groups[i]);
-			count+=s4.n_elem;
+			// count+=s4.n_elem;
 			arma::mat M1=ZZ1.cols(s4);
 			arma::mat M2=trans(M1)*M1;
 			M2f(i)=M2;
@@ -442,9 +442,9 @@ List BlockUpdateGL(mat& beta,const mat& Z1, double lam, const mat& Y1,double eps
 	int n=beta.n_rows, m=beta.n_cols;
 	arma::mat betaPrev=beta;
 	int converge=0;
-	int count=0;
+	// int count=0;
  
-	if(groups.size()==count)
+	if(groups.size()==0)
 		{
 			beta.zeros(n,m);
 			active=groups;
@@ -2405,7 +2405,7 @@ mat ThreshUpdateSGL(mat& betaActive,const mat& Z, double lam,const mat& Y,double
 	List active(n1);
 	int count=0;
 	List betaActive2(3);
-	int iters=0;
+	// int iters=0;
 	for(int i=0; i<n1; ++i)
 		{
 			NumericVector g1=groups[i];
@@ -2431,7 +2431,7 @@ mat ThreshUpdateSGL(mat& betaActive,const mat& Z, double lam,const mat& Y,double
 				threshold=arma::norm(thresh1,"inf");
 				active=betaActive2("active");
 				betaLast=betaActive;
-				iters+=1;
+				// iters+=1;
 			}
 	}
 	// Rcout<<iters<<std::endl;

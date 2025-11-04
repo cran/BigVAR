@@ -1,4 +1,4 @@
-021b4750574c50500980a206bbd765ae *DESCRIPTION
+048f43e0aaa93567520bb0b342663b30 *DESCRIPTION
 2abb11127e520d70c15fa238fb88e9e9 *NAMESPACE
 d4235a19713d1006d921d5ab7a18924e *NEWS
 e152b09597a2ab9a2ee6d444318abac7 *R/BigVAR.R
@@ -14,7 +14,7 @@ a430c1fb53d790c84825145f00e36484 *data/Generator.RData
 74c83369123810393b9bb69ad86dd26c *data/macro.RData
 bd62e98e5422fa46ebad378c8f94bd9b *inst/doc/BigVAR.R
 7af0fac75eb7230be8d623d741da4bd7 *inst/doc/BigVAR.Rmd
-9ca36c92117c5f5cc3e5cb7923e31045 *inst/doc/BigVAR.html
+fbea1a8a61c5888e71db5acdb6cde97e *inst/doc/BigVAR.html
 c73b41dc2acd074f9dca905053ef799f *inst/include/BigVAR.h
 4fdac9f320c2c15ed5fa4feae66885fd *man/A.Rd
 78dfbe0c29c0fe0a6504a207a9246125 *man/BigVAR-class.Rd
@@ -41,7 +41,7 @@ d1941d23bcc72f70ce313a881a8c00cf *man/cv.BigVAR-methods.Rd
 bcda67e2784992dd43bdcb4c5c5c00d7 *man/show-methods-BigVAR.results.Rd
 9cf6496455e7bf4a5ec5cd71ed20c7d2 *man/show-methods.Rd
 3e999a7116bae8330ba77d0813c8294d *src/DataCons.cpp
-1ce25254c5488bff027d3e830f230fd3 *src/ExperimentalBigVARFunctionsX.cpp
+c4791d8e93815126b65afff14bdd12bd *src/ExperimentalBigVARFunctionsX.cpp
 2a6f9e9e044a78154d3cfda5936d6f48 *src/Makevars
 2a6f9e9e044a78154d3cfda5936d6f48 *src/Makevars.win
 caea0fcd0297d0da73e8303a52957b57 *src/RcppExports.cpp

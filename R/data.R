@@ -22,8 +22,46 @@ NULL
 #' Example multivariate macroeconomic time series
 #' 
 #' @name Y1
-#' @title Example quarterly macroeconomic data
+#' @title Example US quarterly macroeconomic data
 #' @docType data
 #' @details US Macroeconomic Time Series: CPI, Federal Funds Rate, Gross Domestic Product, and M1.  Ranging from Q2 1959 to Q1 2025.  Procured from FRED, Federal Reserve Bank of St. Louis.
+#' @author Will Nicholson
+ NULL
+
+
+#' CPI Data
+#' 
+#' @name CPI
+#' @title US Consumer Price Index
+#' @docType data
+#' @details US Macroeconomic Time Series: CPI.  Ranging from Q2 1959 to Q1 2025.  Procured from FRED, Federal Reserve Bank of St. Louis.
+#' @author Will Nicholson
+ NULL
+
+
+#' GDP Data
+#' 
+#' @name GDP
+#' @title US Gross Domestic Product
+#' @docType data
+#' @details US Macroeconomic Time Series: GDP.  Ranging from Q2 1959 to Q1 2025.  Procured from FRED, Federal Reserve Bank of St. Louis.
+#' @author Will Nicholson
+ NULL
+
+#' FFR Data
+#' 
+#' @name FFR
+#' @title US Federal Funds Rate
+#' @docType data
+#' @details US Macroeconomic Time Series: FFR.  Ranging from Q2 1959 to Q1 2025.  Procured from FRED, Federal Reserve Bank of St. Louis.
+#' @author Will Nicholson
+ NULL
+
+#' M1 Data
+#' 
+#' @name M1
+#' @title US M1
+#' @docType data
+#' @details US Macroeconomic Time Series: M1.  Ranging from Q2 1959 to Q1 2025.  Procured from FRED, Federal Reserve Bank of St. Louis.
 #' @author Will Nicholson
  NULL

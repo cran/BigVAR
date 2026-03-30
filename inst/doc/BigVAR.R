@@ -407,35 +407,43 @@ return(IRF)
 
 }
 
-## ----echo=TRUE,eval=TRUE,cache=TRUE-------------------------------------------
-require(quantmod)
-require(zoo)
-# get GDP, Federal Funds Rate, CPI from FRED
-#Gross Domestic Product (Relative to 2000)
-getSymbols('GDP',src='FRED',type='xts')
-GDP<- aggregate(GDP,as.yearqtr,mean)
-GDP <- GDP/mean(GDP["2000"])*100
-# Transformation Code: First Difference of Logged Variables
-GDP <- diff(log(GDP))
-index(GDP) <- as.yearqtr(index(GDP))
-# Federal Funds Rate
-getSymbols('FEDFUNDS',src='FRED',type='xts')
-FFR <- aggregate(FEDFUNDS,as.yearqtr,mean)
-# Transformation Code: First Difference
-FFR <- diff(FFR)
-# CPI ALL URBAN CONSUMERS, relative to 1983
-getSymbols('CPIAUCSL',src='FRED',type='xts')
-CPI <- aggregate(CPIAUCSL,as.yearqtr,mean)
-CPI <- CPI/mean(CPI['1983'])*100
-# Transformation code: difference of logged variables
-CPI <- diff(log(CPI))                             
-# Seasonally Adjusted M1
-getSymbols('M1SL',src='FRED',type='xts')
-M1<- aggregate(M1SL,as.yearqtr,mean)
-# Transformation code, difference of logged variables
-M1 <- diff(log(M1))
-# combine series
-Y <- cbind(CPI,FFR,GDP,M1)
+## ----echo=TRUE,eval=FALSE,cache=TRUE------------------------------------------
+# # not run due to occasional issues with getSymbols; data include as "macro"
+# require(quantmod)
+# require(zoo)
+# # get GDP, Federal Funds Rate, CPI from FRED
+# #Gross Domestic Product (Relative to 2000)
+# 
+# GDP <- aggregate(GDP,as.yearqtr,mean)
+# GDP <- GDP/mean(GDP["2000"])*100
+# # Transformation Code: First Difference of Logged Variables
+# GDP <- diff(log(GDP))
+# index(GDP) <- as.yearqtr(index(GDP))
+# # Federal Funds Rate
+# getSymbols('FEDFUNDS',src='FRED',type='xts')
+# FFR <- aggregate(FEDFUNDS,as.yearqtr,mean)
+# # Transformation Code: First Difference
+# FFR <- diff(FFR)
+# # CPI ALL URBAN CONSUMERS, relative to 1983
+# getSymbols('CPIAUCSL',src='FRED',type='xts')
+# CPI <- aggregate(CPIAUCSL,as.yearqtr,mean)
+# CPI <- CPI/mean(CPI['1983'])*100
+# # Transformation code: difference of logged variables
+# CPI <- diff(log(CPI))
+# # Seasonally Adjusted M1
+# getSymbols('M1SL',src='FRED',type='xts')
+# M1<- aggregate(M1SL,as.yearqtr,mean)
+# # Transformation code, difference of logged variables
+# M1 <- diff(log(M1))
+# # combine series
+# Y1 <- cbind(CPI,FFR,GDP,M1)
+# 
+
+## ----echo=TRUE,cache=TRUE-----------------------------------------------------
+
+data(macro)
+require(xts)
+Y <- Y1
 names(Y) <- c("CPI","FFR","GDP","M1")
 Y <- na.omit(Y)
 k=ncol(Y)

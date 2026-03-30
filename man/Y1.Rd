@@ -3,7 +3,7 @@
 \docType{data}
 \name{Y1}
 \alias{Y1}
-\title{Example quarterly macroeconomic data}
+\title{Example US quarterly macroeconomic data}
 \description{
 Example multivariate macroeconomic time series
 }

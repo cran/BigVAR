@@ -1,4 +1,4 @@
-048f43e0aaa93567520bb0b342663b30 *DESCRIPTION
+b7cd7c229806b927cbf5af140cccf8ef *DESCRIPTION
 2abb11127e520d70c15fa238fb88e9e9 *NAMESPACE
 d4235a19713d1006d921d5ab7a18924e *NEWS
 e152b09597a2ab9a2ee6d444318abac7 *R/BigVAR.R
@@ -7,14 +7,18 @@ e152b09597a2ab9a2ee6d444318abac7 *R/BigVAR.R
 0061b3282e8ef603133af76f5bcab4e1 *R/BigVARObjectClass.R
 aad636de62df8bb1d7e7b005f9f473e2 *R/BigVARSupportFunctions.R
 33e80c5e6f9d0e7e25698262056e1c88 *R/RcppExports.R
-aff47da32d15bfb48fcaf4772ef63bdb *R/data.R
+b223bfa70967b016f36240c4ec0d16e7 *R/data.R
 5709f39840659f0815ec79a276a0ef02 *build/vignette.rds
+4f8e9b623e17add466cab5f416ab9fb2 *data/CPI.RData
+3ea3fbc2335bcd0757c7a5a2fd835962 *data/FFR.RData
+9e1dc726e0e1726c41d55aed87b8a386 *data/GDP.RData
 a430c1fb53d790c84825145f00e36484 *data/Generator.RData
+0a00bf3a963b0afb0ecd5318609275ff *data/M1.RData
 5843629fc9b8bb29aa0a22b5b35aba98 *data/Y.RData
 74c83369123810393b9bb69ad86dd26c *data/macro.RData
-bd62e98e5422fa46ebad378c8f94bd9b *inst/doc/BigVAR.R
-7af0fac75eb7230be8d623d741da4bd7 *inst/doc/BigVAR.Rmd
-fbea1a8a61c5888e71db5acdb6cde97e *inst/doc/BigVAR.html
+734965dfa1c25af43660a710c5a5d723 *inst/doc/BigVAR.R
+aab06d0a796975c7f2b6ac40e4ab7af8 *inst/doc/BigVAR.Rmd
+08bb0df5fc393156c87889faf010fd2b *inst/doc/BigVAR.html
 c73b41dc2acd074f9dca905053ef799f *inst/include/BigVAR.h
 4fdac9f320c2c15ed5fa4feae66885fd *man/A.Rd
 78dfbe0c29c0fe0a6504a207a9246125 *man/BigVAR-class.Rd
@@ -25,6 +29,10 @@ c7f1d95c2d50987b6a6c716185bdb1f4 *man/BigVAR.fit.Rd
 363c2deb187be36637b4203ded66de44 *man/BigVAR.results-coef-methods.Rd
 2214490df0bdfce869ea3451e650b2f4 *man/BigVAR.results-plot-methods.Rd
 8002d2c3dd73ff445c2023f42b883c4e *man/BigVAR.results.Rd
+0876028e7c8f35286a908ea32b39238e *man/CPI.Rd
+bcde77f12a81f55cfbf351a81b2c21da *man/FFR.Rd
+cdf10900048b3afa5d26a5a2c5c43115 *man/GDP.Rd
+2b3a4599e2285a239512027746c33704 *man/M1.Rd
 2340f8d2690fa7a7e4f90ad50df29d7a *man/MultVarSim.Rd
 fe27325fb1bd954eec55ec0ab8edd01f *man/PredictVARX.Rd
 695fd1ec21988a119cf3c653a1d9ab62 *man/SparsityPlot.BigVAR.results-methods.Rd
@@ -33,7 +41,7 @@ b2ea297bb48903c2857b225d8458b011 *man/VARXFit.Rd
 26a78835e04fb9ca1c0b8473c67ed954 *man/VARXLagCons.Rd
 e3cffb3b395ec98a8c3fa03d60bcbee9 *man/VarptoVar1MC.Rd
 17a9b7eb9408a9a1b9354af382a46354 *man/Y.Rd
-676265a6ae4ffef92bb36a11a34d3fa4 *man/Y1.Rd
+0a318d52642761b9eeb82efad253fc4f *man/Y1.Rd
 6328cc4bd9394ed7fbc2d1eb40e84d89 *man/constructModel.Rd
 d1941d23bcc72f70ce313a881a8c00cf *man/cv.BigVAR-methods.Rd
 2cd2affc71240814ebd564ec2389d6ad *man/plot.BigVAR-methods.Rd
@@ -45,7 +53,7 @@ c4791d8e93815126b65afff14bdd12bd *src/ExperimentalBigVARFunctionsX.cpp
 2a6f9e9e044a78154d3cfda5936d6f48 *src/Makevars
 2a6f9e9e044a78154d3cfda5936d6f48 *src/Makevars.win
 caea0fcd0297d0da73e8303a52957b57 *src/RcppExports.cpp
-7af0fac75eb7230be8d623d741da4bd7 *vignettes/BigVAR.Rmd
+aab06d0a796975c7f2b6ac40e4ab7af8 *vignettes/BigVAR.Rmd
 d832306134f59cad4d976058ecb14507 *vignettes/additional_material/bigvar_references.bib
 1e74e888d94ad0917379e488ed855a1a *vignettes/additional_material/loo.png
 8e88e7b48b09ba819d39fcba9a08186c *vignettes/additional_material/rolling_evolve_upd.png
